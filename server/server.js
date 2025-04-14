@@ -28,6 +28,7 @@ app.use(cors({
           callback(null, true); 
         } else {
         }
+        
       },
     methods:["GET","POST","DELETE","PUT"],
     allowedHeaders:[
