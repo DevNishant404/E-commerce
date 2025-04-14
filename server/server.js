@@ -15,10 +15,20 @@ const app=express()
 
 const PORT = process.env.PORT || 5000
 
-
+const allowedOrigin=[
+    "http://localhost:5173",
+    "https://e-commerce-jade-chi-41.vercel.app"
+]
 
 app.use(cors({
-    origin:"http://localhost:5173",
+    origin: function (origin, callback) {
+        if (!origin) return callback(null, true);
+    
+        if (allowedOrigin.includes(origin)) {
+          callback(null, true); 
+        } else {
+        }
+      },
     methods:["GET","POST","DELETE","PUT"],
     allowedHeaders:[
         "content-type",
