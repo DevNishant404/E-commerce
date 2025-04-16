@@ -22,14 +22,13 @@ const allowedOrigin=[
 
 app.use(cors({
     origin: function (origin, callback) {
-        if (!origin) return callback(null, true);
-    
-        if (allowedOrigin.includes(origin)) {
-          callback(null, true); 
-        } else {
-        }
-        
-      },
+      if (!origin) return callback(null, true);
+      if (allowedOrigin.some(o => origin.startsWith(o))) {
+          return callback(null, true);
+      }
+      return callback(new Error("Not allowed by CORS"));
+  },
+  
     methods:["GET","POST","DELETE","PUT"],
     allowedHeaders:[
         "content-type",
